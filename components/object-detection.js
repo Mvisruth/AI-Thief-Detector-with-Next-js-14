@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import {load as cocossLoad} from "@tensorflow-models/coco-ssd"
 import * as tf from '@tensorflow/tfjs'
+import { renderPrediction } from '@/utilites/render-prediction'
 let detectInterval 
 const ObjectDetection = () => {
     const [isLoadind,setIsLoading]=useState(true)
@@ -19,15 +20,19 @@ const ObjectDetection = () => {
 
     }
     async function  runObjectDeletion(net){
-        if(canvasRef.current && webcamRef.current !==null && webcamRef.current.video?.readyState==4)
+        if(canvasRef.current && webcamRef.current !==null && webcamRef.current.video?.readyState===4)
         {
             canvasRef.current.width = webcamRef.current.video.videoWidth
             canvasRef.current.Hight = webcamRef.current.video.videoHight
 
             //find detected object
-            const detectedObject = await net.detect(webcamRef.current.video,undefined,0.6)
+            const detectedObject = await net.detect(
+                webcamRef.current.video,
+                undefined,
+                0.6)
             // console.log(detectedObject);
-            const context = canvasRef.getContext("2d")
+
+            const context = canvasRef.current.getContext("2d")
             renderPrediction(detectedObject,context)
         }
     }
@@ -38,8 +43,8 @@ const ObjectDetection = () => {
                 const myVideoWidth = webcamRef.current.video.videoWidth
                 const myVideoHight = webcamRef.current.video.videoHight
                    
-                webcamRef.current.video.videoWidth= myVideoWidth
-                webcamRef.current.video.videoHight= myVideoHight
+                webcamRef.current.video.width  = myVideoWidth
+                webcamRef.current.video.Hight = myVideoHight
            }
            
     }
