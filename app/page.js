@@ -1,3 +1,4 @@
+import ObjectDetection from "@/components/object-detection";
 import Image from "next/image";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
      >
       Thief Detection Alarm
       </h1>
+      <ObjectDetection/>
     </main>
   );
 }
