@@ -1,3 +1,5 @@
+import { throttle } from "lodash"
+
 export const renderPrediction = (prediction,ctx)=>{
     ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height)
     //fonts
@@ -27,5 +29,12 @@ export const renderPrediction = (prediction,ctx)=>{
         
         ctx.fillStyle="#000000";
         ctx.fillText(prediction.class,x,y)
+        if(isPerson){
+            playAudio()
+        }
     })
 }
+const playAudio=throttle(()=>{
+    const audio = new Audio("/security_alert.mp3")
+    audio.play();
+},2000)

@@ -6,9 +6,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-8">
      <h1
      className="gradient-title gradient font-extrabold
-      text-3xl 
-      md:text-6xl
-      lg:text-8xl
+      text-4xl 
+      md:text-4xl
+      lg:text-6xl
       text-center"
       
      >
